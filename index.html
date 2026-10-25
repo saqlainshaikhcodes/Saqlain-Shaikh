@@ -131,6 +131,54 @@ input:-webkit-autofill,textarea:-webkit-autofill{-webkit-box-shadow:0 0 0 100px 
 .av img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}
 .av{box-shadow:0 0 0 3px color-mix(in srgb,var(--ac) 80%,transparent),0 14px 30px #0005}
 @media(min-width:801px){.av{width:124px;height:124px;border-radius:30px}}
+
+/* ---- mobile responsive fixes ---- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+.wrap>*{min-width:0}
+.info div{word-break:normal;overflow-wrap:anywhere}
+img,svg,canvas{max-width:100%}
+.trow input,.trow{min-width:0}
+/* touch devices: no sticky hover states */
+@media(hover:none){.c:hover,.sk:hover,.chips i:hover{transform:none;box-shadow:none}.c::after,.sk::after{display:none}}
+/* short desktop/landscape screens: sidebar should scroll with page */
+@media(min-width:801px) and (max-height:760px){.side{position:static}}
+@media(max-width:800px){
+ .wrap{grid-template-columns:minmax(0,1fr);padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+ /* backdrop-filter/animation on .main traps the fixed bottom nav inside it */
+ .main{-webkit-backdrop-filter:none;backdrop-filter:none;animation-fill-mode:backwards}
+ input,textarea{font-size:16px}
+ .send{width:100%}
+ .tx{padding:8px 12px;font-size:18px}
+ .tb{padding:12px 14px}
+ #tfloat #tout{height:min(40dvh,340px)}
+ #tfab{padding:12px 16px}
+ .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+ .dl2{margin-bottom:10px}
+ nav button{min-height:48px;justify-content:center}
+ .tl ul{padding-left:16px}
+ .map a{top:8px;right:8px}
+}
+@media(max-width:480px){
+ h1{font-size:20px}
+ .main{padding:16px 14px}
+ .tl{padding-left:14px;margin-left:4px}
+ .tl .it::before{left:-21px}
+ .term{font-size:12px}
+ .trow{flex-wrap:nowrap}
+ .ps{font-size:11px}
+}
+@media(max-width:360px){
+ .stats{gap:8px}.stats div{padding:12px 4px}.stats span{font-size:11px}
+ .skg{grid-template-columns:repeat(3,1fr)}
+ nav button{font-size:10px;padding:6px 2px}
+ .info{font-size:12px}
+}
+@media(max-height:480px) and (orientation:landscape){
+ nav{padding-top:4px!important}nav button{min-height:40px;flex-direction:row!important;gap:6px!important}
+ #tfloat #tout{height:36vh}
+ #tfab{bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+}
 </style><link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,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"></head><body>
 <canvas id="bg"></canvas><canvas id="fx"></canvas><div id="cd"></div><div id="cr"></div><div id="glow"></div>
 <div class="wrap">
@@ -207,7 +255,7 @@ const N=400,pos=new Float32Array(N*3);for(let i=0;i<N*3;i++)pos[i]=(Math.random(
 const pg=new THREE.BufferGeometry();pg.setAttribute("position",new THREE.BufferAttribute(pos,3));
 const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:gc,size:.05,transparent:true,opacity:.7}));S.add(pts);
 let mx=0,my=0,sy=0;addEventListener("mousemove",e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});addEventListener("scroll",()=>sy=scrollY);
-function rs(){R.setSize(innerWidth,innerHeight);R.setPixelRatio(Math.min(devicePixelRatio,2));C.aspect=innerWidth/innerHeight;C.updateProjectionMatrix()}rs();addEventListener("resize",rs);
+function rs(){R.setSize(innerWidth,innerHeight);R.setPixelRatio(Math.min(devicePixelRatio,innerWidth<800?1.5:2));C.aspect=innerWidth/innerHeight;C.updateProjectionMatrix()}rs();addEventListener("resize",rs);
 (function an(t){t*=.001;knot.rotation.x=t*.3;knot.rotation.y=t*.4;ico.rotation.x=t*.5;ico.rotation.y=t*.3;ico.position.y=-1.5+Math.sin(t)*.6;pts.rotation.y=t*.03;
 C.position.x+=(mx*2-C.position.x)*.04;C.position.y+=(-my*2-C.position.y)*.04;C.lookAt(0,0,0);R.render(S,C);requestAnimationFrame(an)})(0)}catch(e){}
 
